@@ -17,9 +17,7 @@ let todoStorage = {
 }
 
 
-
-
-const app = new Vue({
+ const app = new Vue({
   el: '#app',
   data: {
     todos: [],
@@ -32,6 +30,14 @@ const app = new Vue({
       { value: 0,  label: '作業中' },
       { value: 1,  label: '完了' }
     ],
+  },
+
+  computed: {
+    computedTodos: function() {
+      return this.todos.filter(function(el) {
+        return this.current < 0 ? true : this.current === el.state
+      }, this)
+    },
   },
 
 
