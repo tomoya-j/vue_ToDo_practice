@@ -7,9 +7,15 @@
 </head>
 <body>
   <div id="app">
+    <h1>チュートリアルToDoリスト</h1>
+
+    <label v-for="label in options" >
+      <input type="radio"
+        v-model="current"
+        v-bind:value="label.value">{{ label.label }}
+    </label>
     
     <table>
-      
       <thead>
         <tr>
           <th class="id">ID</th>
@@ -24,10 +30,14 @@
           <th>{{ item.id }}</th>
           <td>{{ item.comment }}</td>
           <td class="state">
-            <button>{{ item.state }}</button>
+            <button v-on:click="doChangeState(item)">
+              {{ item.state }}
+            </button>
           </td>
           <td class="button">
-            <button>削除</button>
+            <button v-on:click.ctrl="doRemove(item)">
+              削除
+            </button>
           </td>
         </tr>
       </tbody>

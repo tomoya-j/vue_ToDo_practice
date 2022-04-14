@@ -22,7 +22,16 @@ let todoStorage = {
 const app = new Vue({
   el: '#app',
   data: {
-    todos: []
+    todos: [],
+
+
+  current: -1,
+
+    options: [
+      { value: -1, label: 'すべて' },
+      { value: 0,  label: '作業中' },
+      { value: 1,  label: '完了' }
+    ],
   },
 
 
@@ -53,6 +62,16 @@ const app = new Vue({
             state: 0
           })
           comment.value = ''
+        },
+
+        doChangeState: function(item) {
+          item.state = item.state ? 0 : 1
+        },
+
+        doRemove: function(item) {
+          var index = this.todos.indexOf(item)
+          this.todos.splice(index, 1)
+
         }
       }
     })
